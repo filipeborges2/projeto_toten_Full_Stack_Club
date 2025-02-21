@@ -16,7 +16,7 @@ datasource db {
 model Restaurant {
   id             String         @id @default(uuid())
   name           String
-  slug           String
+  slug           String         @unique
   description    String
   avatarImageUrl String
   coverImageUrl  String
@@ -68,7 +68,7 @@ model Order {
 model OrderProduct {
   id        Int      @id @default(autoincrement())
   quantity  Int
-  product   Product  @relation(fields: [productId], references: [id],onDelete: Cascade) //Tem relacionamento com a tabela Product - OnDelete Cascade se eu deletar o produto, deleta o pedido
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade) //Tem relacionamento com a tabela Product - OnDelete Cascade se eu deletar o produto, deleta o pedido
   productId String
   orderId   Int
   order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade) //Tem relacionamento com a tabela Order - OnDelete Cascade se eu deletar o pedido, deleta o produto
